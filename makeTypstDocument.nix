@@ -2,13 +2,16 @@
 , stdenv
 , typst
 }:
-{ name
-, src
-, main
-, typstDependencies
-, packagesRepo
+{ src
+, name ? "document.pdf"
+, main ? "main.typ"
+, typstDependencies ? [ ]
+, packagesRepo ? null
 , ...
 }:
+
+assert typstDependencies != [ ] -> packagesRepo != null;
+
 # We try to use this trick to make packages available locally:
 let
   typstDependencyScript = dep: ''
