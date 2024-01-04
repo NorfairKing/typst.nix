@@ -27,6 +27,10 @@
           name = "example.pdf";
           main = "example.typ";
           src = ./example;
+          packagesRepo = builtins.fetchGit {
+            url = "https://github.com/typst/packages";
+            rev = "78a618a0a6f46103fcaa2673c8af3963f9d1d4e5";
+          };
           typstDependencies = [
             {
               name = "polylux";
