@@ -1,12 +1,13 @@
 { lib
 , stdenv
 , typst
+, defaultTypstPackagesRepo
 }:
 { src
 , name ? "document.pdf"
 , main ? "main.typ"
 , typstDependencies ? [ ]
-, packagesRepo ? null
+, packagesRepo ? defaultTypstPackagesRepo
 , ...
 }:
 

@@ -1,19 +1,22 @@
 {
   description = "typst.nix";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs?ref=nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
+    typst-packages.url = "github:typst/packages";
+    typst-packages.flake = false;
   };
 
   outputs =
     { self
     , nixpkgs
     , pre-commit-hooks
+    , typst-packages
     }:
     let
       system = "x86_64-linux";
       overlay = final: _: {
-        makeTypstDocument = final.callPackage ./makeTypstDocument.nix { };
+        makeTypstDocument = final.callPackage ./makeTypstDocument.nix { defaultTypstPackagesRepo = typst-packages; };
       };
       pkgs = import nixpkgs {
         inherit system;
@@ -27,14 +30,10 @@
           name = "example.pdf";
           main = "example.typ";
           src = ./example;
-          packagesRepo = builtins.fetchGit {
-            url = "https://github.com/typst/packages";
-            rev = "78a618a0a6f46103fcaa2673c8af3963f9d1d4e5";
-          };
           typstDependencies = [
             {
               name = "polylux";
-              version = "0.3.1";
+              version = "0.4.0";
             }
           ];
         };
