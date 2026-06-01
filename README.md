@@ -1,5 +1,7 @@
 # Building Typst documents with Nix
 
+[![NixCI](https://staging.nix-ci.com/badge/gh:NorfairKing:typst.nix)](https://staging.nix-ci.com/gh:NorfairKing:typst.nix)
+
 ## Using this repository
 
 ``` nix
